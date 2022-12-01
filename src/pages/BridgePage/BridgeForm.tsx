@@ -1,12 +1,12 @@
 // @ts-nocheck
 import React from 'react';
+import Navs from 'components/Navbar/Navs';
 import ChainSelect from 'pages/BridgePage/ChainSelect';
 import SendButton from 'pages/BridgePage/SendButton';
 import Svgs from 'resources/icons';
 import { useBridgeData } from './BridgeContext/BridgeDataContext';
 import BridgeAssetSelect from './BridgeAssetSelect';
 import BridgeFeeDisplay from './BridgeFeeDisplay';
-import BridgeAssetErrorText from './BridgeAssetErrorText';
 import { useTxStatus } from 'contexts/txStatusContext';
 import BridgeDestinationInput from './BridgeDestinationInput';
 
@@ -33,9 +33,10 @@ const BridgeForm = () => {
   const shouldShowDestinationInput = originChainIsEvm || destinationChainIsEvm;
 
   return (
-    <div className="2xl:inset-x-0 mt-4 justify-center min-h-full flex items-center pb-2">
-      <div className="flex flex-col flex-y sm:p-8 bg-secondary rounded-lg w-[32rem] gap-6">
-        <div className="flex gap-10 flex-y items-end">
+    <div className="2xl:inset-x-0 justify-center min-h-full flex flex-col gap-6 items-center pb-2">
+      <Navs />
+      <div className="flex flex-col px-3 py-4 sm:p-8 bg-secondary rounded-lg w-[32rem] gap-6">
+        <div className="flex gap-10 flex-y mt-4 items-end">
           <ChainSelect
             chain={originChain}
             chainOptions={originChainOptions}
@@ -58,7 +59,6 @@ const BridgeForm = () => {
         <div className="flex flex-col flex-y gap-4">
           <div>
             <BridgeAssetSelect />
-            {/* <BridgeAssetErrorText /> */}
           </div>
         </div>
         {shouldShowDestinationInput && <BridgeDestinationInput />}

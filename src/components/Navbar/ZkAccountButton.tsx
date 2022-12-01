@@ -55,7 +55,7 @@ const ZkAccountConnect = () => {
   return (
     <>
       <button
-        className="bg-manta-button-blue text-white py-3 px-4 font-medium cursor-pointer rounded-lg"
+        className="bg-connect-signer-button text-white py-3 px-4 font-medium cursor-pointer rounded-lg"
         onClick={showModal}>
         Connect Signer
       </button>

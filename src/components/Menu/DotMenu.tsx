@@ -16,8 +16,6 @@ import {
   faCircleQuestion,
   faEllipsis,
   faFaucetDrip,
-  faMoon,
-  faSun
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -86,8 +84,8 @@ const Menu = () => {
   };
 
   const DotMenuContent = () => (
-    <div className="w-48 h-68 flex-column flex-grow mt-3 bg-primary rounded-3xl gap-y-4 p-5 absolute right-0 top-full z-50 border border-manta-gray">
-      {theme === themeType.Dark ? <ChangeThemeMenuItem theme={themeType.Light} setTheme={setTheme} name={'Light Mode'} icon={faSun} /> : <ChangeThemeMenuItem theme={themeType.Dark} setTheme={setTheme} name={'Dark Mode'} icon={faMoon} />}
+    <div className="w-48 h-68 flex-column flex-grow mt-3 bg-fifth rounded-3xl gap-y-4 p-5 absolute right-0 top-full z-50 border border-white border-opacity-20">
+      {/* {theme === themeType.Dark ? <ChangeThemeMenuItem theme={themeType.Light} setTheme={setTheme} name={'Light Mode'} icon={faSun} /> : <ChangeThemeMenuItem theme={themeType.Dark} setTheme={setTheme} name={'Dark Mode'} icon={faMoon} />} */}
       <MenuItem link={config.TWITTER_URL} name={'Twitter'} icon={faTwitter}/>
       <MenuItem link={links.DISCORD_URL} name={'Discord'} icon={faDiscord}/>
       <MenuItem link={links.TELEGRAM_URL} name={'Telegram'} icon={faTelegram}/>

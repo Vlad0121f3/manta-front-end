@@ -26,7 +26,7 @@ const WalletNotInstalledBlock = ({
         />
         {walletName}
       </div>
-      <div className="rounded-lg bg-button-secondary py-2 px-4 text-xs">
+      <div className="rounded-lg bg-button-fourth text-white py-2 px-4 text-xs">
         Install
       </div>
     </a>
@@ -47,7 +47,7 @@ const WalletInstalledBlock = ({ walletName, walletLogo, connectHandler }) => {
         />
         {walletName}
       </div>
-      <div className="rounded-lg bg-button-secondary py-2 px-4 text-xs">
+      <div className="rounded-lg bg-button-fourth text-white py-2 px-4 text-xs">
         Connect
       </div>
     </button>

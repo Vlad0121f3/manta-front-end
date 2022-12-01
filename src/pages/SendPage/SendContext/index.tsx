@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useReducer, useContext, useEffect } from 'react';
+import React, { useReducer, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSubstrate } from 'contexts/substrateContext';
 import { useExternalAccount } from 'contexts/externalAccountContext';
@@ -102,10 +102,15 @@ export const SendContextProvider = (props) => {
   // Toggles the private/public status of the receiver's account
   const toggleReceiverIsPrivate = () => {
     dispatch({
-      type: SEND_ACTIONS.TOGGLE_RECEIVER_ACCOUNT_IS_PRIVATE,
-      privateAddress: privateWallet.privateAddress
+      type: SEND_ACTIONS.TOGGLE_RECEIVER_ACCOUNT_IS_PRIVATE
     });
   };
+
+  const swapSenderAndReceiverArePrivate = () => {
+    dispatch({
+      type: SEND_ACTIONS.SWAP_SENDER_AND_RECEIVER_ACCOUNTS_ARE_PRIVATE
+    })
+  }
 
   // Sets the asset type to be transacted
   const setSelectedAssetType = (selectedAssetType) => {
@@ -519,6 +524,7 @@ export const SendContextProvider = (props) => {
     setSenderAssetTargetBalance,
     toggleSenderIsPrivate,
     toggleReceiverIsPrivate,
+    swapSenderAndReceiverArePrivate,
     setSelectedAssetType,
     setReceiver,
     send,

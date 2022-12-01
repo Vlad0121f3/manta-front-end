@@ -11,13 +11,16 @@ const SendToForm = () => {
   const { walletIsBusy, isInitialSync } = usePrivateWallet();
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex flex-col gap-4 items-stretch">
+    <div>
+      <div className="mb-6 items-stretch">
+        <div className="flex flex-row justify-between mb-4 items-center">
+        <div className="text-black dark:text-white">To</div>
         <PublicPrivateToggle
           onToggle={toggleReceiverIsPrivate}
           isPrivate={receiverAssetType?.isPrivate}
           prefix="receiver"
         />
+        </div>
         <SendToAddressForm />
       </div>
       <SendButton />

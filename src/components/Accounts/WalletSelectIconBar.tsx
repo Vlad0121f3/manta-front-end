@@ -1,4 +1,5 @@
 // @ts-nocheck
+import React from 'react';
 import Svgs from 'resources/icons';
 import classNames from 'classnames';
 import { useMetamask } from 'contexts/metamaskContext';

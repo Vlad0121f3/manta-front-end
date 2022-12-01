@@ -3,7 +3,6 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { useTxStatus } from 'contexts/txStatusContext';
-import GradientText from 'components/GradientText';
 import BalanceDisplay from 'components/Balance/BalanceDisplay';
 
 
@@ -20,7 +19,7 @@ const BalanceInput = ({
   return (
     <div
       className={classNames(
-        'flex flex-col w-full rounded-lg manta-bg-gray content-around justify-center h-24',
+        'flex flex-col w-full rounded-lg manta-bg-gray content-around justify-center h-20',
         { disabled: disabled }
       )}
     >
@@ -29,7 +28,7 @@ const BalanceInput = ({
           id="amountInput"
           onChange={(e) => onChangeAmountInput(e.target.value)}
           className={classNames(
-            'w-1/2 absolute left-4 bottom-8 p-2 text-2xl font-bold text-black dark:text-white manta-bg-gray outline-none rounded-lg',
+            'w-1/2 absolute left-4 bottom-7 p-2 text-xl placeholder-gray-500 dark:placeholder-gray-500 text-black dark:text-white manta-bg-gray bg-opacity-0 outline-none rounded-lg',
             { disabled: disabled }
           )}
           value={inputValue}
@@ -44,8 +43,7 @@ const BalanceInput = ({
       </div>
       <BalanceDisplay
         balance={balanceText}
-        className="text-xs manta-gray mt-2.5 absolute right-9 bottom-3"
-        loaderClassName="text-manta-gray border-manta-gray bg-manta-gray"
+        className="text-xs text-white mt-2.5 mr-6 absolute right-0 bottom-0 h-8"
         loader={shouldShowLoader}
       />
     </div>
@@ -69,11 +67,11 @@ const MaxButton = ({ onClickMax, isDisabled }) => {
       onClick={onClick}
       className={classNames(
         'cursor-pointer',
-        'text-center rounded-lg unselectable-text absolute left-6 bottom-3 flex items-center text-xss font-semibold manta-gray',
+        'text-center rounded-lg unselectable-text absolute left-6 bottom-3 flex items-center text-xss text-manta-blue',
         { disabled: isDisabled }
       )}
     >
-      <GradientText text="Select Max" />
+      Select Max
     </span>
   );
 };

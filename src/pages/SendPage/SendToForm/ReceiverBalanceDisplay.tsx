@@ -1,5 +1,4 @@
 import React from 'react';
-import GradientText from 'components/GradientText';
 import { usePrivateWallet } from 'contexts/privateWalletContext';
 import BalanceDisplay from 'components/Balance/BalanceDisplay';
 import { useSend } from '../SendContext';
@@ -10,35 +9,43 @@ const ReceiverBalanceDisplay = () => {
     receiverCurrentBalance,
     receiverAddress,
     isToPrivate,
-    isPrivateTransfer
+    isPrivateTransfer,
+    senderAssetTargetBalance,
   } = useSend();
   const { isInitialSync } = usePrivateWallet();
+  const shouldShowInitialSync =
+    isInitialSync.current && (isToPrivate() || isPrivateTransfer());
+  const balanceString = shouldShowInitialSync
+    ? 'Syncing to ledger'
+    : receiverCurrentBalance?.toString();
+  const shouldShowLoader =
+    receiverAddress && !receiverCurrentBalance && !shouldShowInitialSync;
 
-  const balanceString =
-    isInitialSync && (isToPrivate() || isPrivateTransfer())
-      ? 'Syncing to ledger'
-      : receiverCurrentBalance?.toString();
-
+  const targetBalanceString = senderAssetTargetBalance
+    ? senderAssetTargetBalance.toString()
+    : '0.00';
   return (
-    <div className="flex flex-row gap-4 justify-between items-center px-4 py-2">
-      <BalanceDisplay
-        balance={balanceString}
-        className="flex flex-row gap-1 text-black dark:text-white text-base"
-        loader={receiverAddress && !receiverCurrentBalance}
-      />
-      <div className="pl-2 border-0 flex items-center gap-3">
+    <div className="relative gap-4 justify-between items-center px-4 py-2 manta-bg-gray rounded-lg h-20 mb-2">
+      <div className="absolute left-4 bottom-7 p-2 cursor-default w-1/2 text-xl text-gray-500 overflow-hidden">
+        {targetBalanceString}
+      </div>
+      <div className="absolute right-6 top-2 border-0 flex flex-y items-center gap-3 mt-2">
         <div>
           <img
-            className="w-8 h-8 rounded-full"
+            className="w-5 h-5 rounded-full"
             src={receiverAssetType?.icon}
             alt="icon"
           />
         </div>
-        <GradientText
-          className="text-2xl font-bold"
-          text={receiverAssetType?.ticker}
-        />
+        <div className="text-black dark:text-white place-self-center">
+          {receiverAssetType?.ticker}
+        </div>
       </div>
+      <BalanceDisplay
+        balance={balanceString}
+        className="absolute text-white right-0 bottom-0 mr-6 mt-2.5 h-8 flex flex-row gap-1 text-xs"
+        loader={shouldShowLoader}
+      />
     </div>
   );
 };

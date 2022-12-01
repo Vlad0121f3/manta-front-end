@@ -7,7 +7,7 @@ import { faExternalLink } from '@fortawesome/free-solid-svg-icons';
 export const TxSuccessNotificationContent = ({ msg, extrinsic, subscanBaseUrl }) => {
   const subscanLink = `${subscanBaseUrl}/extrinsic/${extrinsic}`;
   return (
-    <div className="bg-secondary">
+    <div>
       <a
         className=""
         href={subscanLink}
@@ -33,7 +33,7 @@ TxSuccessNotificationContent.propTypes = {
 
 export const NotificationContent = ({ msg }) => {
   return (
-    <div className="bg-secondary pt-2 pb-4 ">
+    <div className="pt-2 pb-4 ">
       <h1 className="text-base pt-1 font-semibold text-thirdry">{msg}</h1>
     </div>
   );

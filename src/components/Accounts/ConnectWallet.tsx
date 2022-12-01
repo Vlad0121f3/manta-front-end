@@ -12,7 +12,7 @@ const ConnectWallet = ({ isButtonShape, setIsMetamaskSelected }) => {
     <>
       {isButtonShape ? (
         <Button
-          className="btn-secondary rounded-lg relative z-10"
+          className="bg-connect-wallet-button text-white py-3 px-4 font-medium cursor-pointer rounded-lg"
           onClick={handleOnClick}
         >
           Connect Wallet

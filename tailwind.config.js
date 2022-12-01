@@ -27,7 +27,9 @@ module.exports = {
     },
     extend: {
       spacing: {
-        '128':'32rem'
+        '128':'32rem',
+        '108':'27rem',
+        '113.5':'28.375rem'
       },
       width: {
         '68': '272px'
@@ -44,27 +46,23 @@ module.exports = {
         success: 'var(--color-bg-success)',
         danger: 'var(--color-bg-danger)',
         'manta-gray': 'var(--color-bg-manta-gray)',
-        button: 'var(--color-bg-button)',
-        'manta-button-blue':'#2B49EA',
-        'manta-button-green':"#00AFA5",
-        'manta-button-light-blue': "#0E50FC"
-      },
-      width: {
-        '140':'35rem'
-      },
-      Height: {
-        '81.5': '20.375rem'
+        button: 'var(--color-bg-button-primary)',
+        'button-secondary': 'var(--color-bg-button-secondary)',
+        'button-fourth': 'var(--color-bg-button-fourth)',
+        'connect-signer-button':'#2B49EA',
+        'connect-wallet-button':'#00AFA5',
+        'gradient-button':'var(--gradient-button-secondary)'
       },
       textColor: {
         accent: 'var(--color-text-accent)',
         primary: 'var(--color-text-primary) !important',
         secondary: 'var(--color-text-secondary)',
         thirdry: 'var(--color-text-thirdry)',
-        fourth: 'var(--color-text-fourth)',
-        link: 'var(--color-bg-button)',
+        link: 'var(--color-bg-button-primary)',
         warning: 'var(--color-text-warning)',
         'gray-light': 'var(--color-text-gray)',
         'manta-gray': 'var(--color-bg-manta-gray)',
+        'manta-blue': 'var(--color-manta-blue)',
       },
       fill: {
         current: 'var(--color-text-secondary)',
@@ -75,14 +73,15 @@ module.exports = {
       borderColor: {
         'manta-gray': 'var(--color-bg-manta-gray)',
         primary: 'var(--color-border-primary)',
-        secondary: 'var(--color-border-secondary)'
+        secondary: 'var(--color-bg-button-primary)'
       }
     }
   },
   variants: {
     extend: {
       fill: ['group-hover', 'active', 'hover'],
-      textColor: ['active']
+      textColor: ['active'],
+      fontWeight: ['hover'],
     }
   },
   plugins: []

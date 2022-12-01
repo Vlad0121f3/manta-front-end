@@ -32,7 +32,7 @@ const AssetTypeSelect = ({
     <Select
       id="selectedAssetType"
       className={classNames(
-        '!absolute right-2 top-2 manta-bg-gray rounded-2xl whitespace-nowrap text-black dark:text-white',
+        '!absolute right-3 manta-bg-gray rounded-2xl whitespace-nowrap text-black dark:text-white',
         { disabled: disabled }
       )}
       isSearchable={false}
@@ -43,7 +43,6 @@ const AssetTypeSelect = ({
       placeholder="--"
       styles={dropdownStyles(disabled)}
       components={{
-        Control: AssetTypeControl,
         SingleValue: AssetTypeSingleValue,
         Option: AssetTypeOption,
         IndicatorSeparator: EmptyIndicatorSeparator
@@ -101,17 +100,13 @@ const EmptyIndicatorSeparator = () => {
   return <div />;
 };
 
-const AssetTypeControl = (props) => {
-  return (
-      <components.Control {...props} />
-  );
-};
-
 const AssetTypeSingleValue = ({ data }) => {
   return (
-    <div className="pl-2 border-0 flex items-center gap-3 mr-2">
-      <img className="w-8 h-8 rounded-full" src={data.icon} alt="icon" />
-      <div className="text-2xl font-bold">{data.ticker}</div>
+    <div className="border-0 flex items-center gap-2">
+      <img className="w-5 h-5 rounded-full" src={data.icon} alt="icon" />
+      <div className="text-black dark:text-white place-self-center">
+        {data.ticker}
+      </div>
     </div>
   );
 };
@@ -120,11 +115,12 @@ const AssetTypeOption = (props) => {
   const { value, innerProps } = props;
   return (
     <div {...innerProps}>
-      <div id={value.ticker} className="flex items-center inline w-full hover:bg-blue-100">
-        <div className="w-10 h-10 py-1 px-2 ml-3  manta-bg-secondary rounded-full flex items-center justify-center">
-          <img className="w-8 rounded-full" src={value.icon} alt="icon" />
-        </div>
-        <div className="pl-4 p-2 text-black">
+      <div
+        id={value.ticker}
+        className="flex items-center inline w-full hover:bg-blue-100"
+      >
+        <img className="ml-3 w-6 rounded-full" src={value.icon} alt="icon" />
+        <div className="p-2 pl-4 text-black">
           <components.Option {...props} />
           <div className="text-xs block manta-gray">{value.name}</div>
         </div>

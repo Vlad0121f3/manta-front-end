@@ -33,6 +33,9 @@ import WalletIcon from 'resources/icons/wallet-icon.svg';
 import ClockIcon from 'resources/icons/clock-icon.svg';
 import SunIcon from 'resources/icons/sun.svg';
 import ShieldIcon from 'resources/icons/shield-lock.svg';
+import InternetIcon from 'resources/icons/internet.svg';
+import LockIcon from 'resources/icons/lock.svg';
+import UpDownArrowIcon from 'resources/icons/up-down-arrow.svg';
 import MoonIcon from 'resources/icons/moon.svg';
 import SwitchIcon from 'resources/icons/switch.svg';
 import SettingIcon from 'resources/icons/setting.svg';
@@ -99,6 +102,9 @@ const Svgs = {
   ClockIcon,
   SunIcon,
   MoonIcon,
+  InternetIcon,
+  LockIcon,
+  UpDownArrowIcon,
   SwitchIcon,
   SettingIcon,
   ArrowDownIcon,
