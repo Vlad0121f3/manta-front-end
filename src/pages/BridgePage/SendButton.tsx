@@ -53,7 +53,7 @@ const ValidationButton = () => {
     return (
       <div
         className={classNames(
-          `py-2 cursor-pointer text-xl btn-hover unselectable-text cursor-not-allowed text-center rounded-lg btn-primary w-full ${bgColor}`
+          `py-2 cursor-pointer text-xl unselectable-text cursor-not-allowed text-center text-white rounded-lg bg-manta-button-green w-full ${bgColor}`
         )}>
         {validationMsg}
       </div>
