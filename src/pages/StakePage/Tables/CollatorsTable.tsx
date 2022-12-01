@@ -144,7 +144,7 @@ const CollatorsTable = () => {
       headerTooltip: amountStakedTooltip,
       suppressMovable: true,
       cellRenderer: (params: any) => {
-        return params.data['Amount Staked'].toString(true, 0);
+        return params.data['Amount Staked'].toDisplayString(0);
       },
       comparator: (valueA, valueB, nodeA, nodeB, isDescending) =>
         valueA.gt(valueB) ? 1 : -1
@@ -156,7 +156,7 @@ const CollatorsTable = () => {
       headerTooltip: minStakeTooltip,
       suppressMovable: true,
       cellRenderer: (params: any) => {
-        return params.data['Minimum Stake'].toString(true, 0);
+        return params.data['Minimum Stake'].toDisplayString(0);
       },
       comparator: (valueA, valueB, nodeA, nodeB, isDescending) =>
         valueA.gt(valueB) ? 1 : -1
@@ -237,7 +237,7 @@ const CollatorsTable = () => {
 
   return (
     <div className="mt-20 mx-auto sortable-table-wrapper" id="collatorsTable">
-      <h1 className="text-base font-semibold text-black dark:text-white flex items-end gap-10">
+      <h1 className="text-base font-semibold text-white flex items-end gap-10">
         Collators
       </h1>
       <div className="mt-6 flex gap-5">

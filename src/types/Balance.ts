@@ -2,6 +2,7 @@
 import Decimal from 'decimal.js';
 import BN from 'bn.js';
 import AssetType from './AssetType';
+import Usd from './Usd';
 
 export default class Balance {
   constructor(assetType, valueAtomicUnits) {
@@ -66,19 +67,8 @@ export default class Balance {
     return this.toDisplayString(6, false)
   }
 
-  toUsd(usdPerToken) {
-    return this.valueBaseUnits().mul(usdPerToken);
-  }
-
-  toUsdString(usdPerToken) {
-    const valueUsd = this.toUsd(usdPerToken);
-    return `$${valueUsd
-      .toDecimalPlaces(2, Decimal.ROUND_DOWN)
-      .toNumber()
-      .toLocaleString(undefined, {
-        maximumFractionDigits: 2,
-        minimumFractionDigits: 2,
-      })}`;
+  toUsd(usdPerToken: Usd) {
+    return new Usd(this.valueBaseUnits().mul(usdPerToken.value));
   }
 
   eq(other) {

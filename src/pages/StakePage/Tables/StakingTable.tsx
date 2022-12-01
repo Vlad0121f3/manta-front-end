@@ -138,7 +138,7 @@ const StakingTable = () => {
       suppressMovable: true,
       headerTooltip: amountTooltip,
       cellRenderer: (params: any) => {
-        return params.data['Amount'].toString(true, 0);
+        return params.data['Amount'].toDisplayString(0);
       },
       comparator: (valueA, valueB, nodeA, nodeB, isDescending) =>
         valueA.gt(valueB) ? 1 : -1
@@ -235,7 +235,7 @@ const StakingTable = () => {
   return (
     <>
       <div className="mt-20 mx-auto sortable-table-wrapper">
-        <h1 className="text-base font-semibold text-black dark:text-white">
+        <h1 className="text-base font-semibold text-white">
           Staking
         </h1>
         <div className="w-full mt-4">{mainComponent}</div>

@@ -10,6 +10,9 @@ import DeveloperConsole from "components/Developer/DeveloperConsole";
 import { TxStatusContextProvider, useTxStatus } from "contexts/txStatusContext";
 import { useEffect } from "react";
 import { showError, showInfo, showSuccess } from "utils/ui/Notifications";
+import { UsdPricesContextProvider } from "contexts/usdPricesContext";
+import { PrivateWalletContextProvider } from "contexts/privateWalletContext";
+import { ZkAccountBalancesContextProvider } from "contexts/zkAccountBalancesContext";
 
 const TxStatusHandler = () => {
   const config = useConfig();
@@ -60,12 +63,18 @@ export const CalamariBasePage = () => {
 export const DolphinBasePage = () => {
   return (
     <ConfigContextProvider network={NETWORK.DOLPHIN}>
-      <MetamaskContextProvider>
-        <BasePage>
-            <Navbar />
-          <Outlet />
-        </BasePage>
-      </MetamaskContextProvider>
+      <BasePage>
+        <UsdPricesContextProvider>
+          <MetamaskContextProvider>
+            <PrivateWalletContextProvider>
+              <ZkAccountBalancesContextProvider>
+                <Navbar />
+                <Outlet />
+              </ZkAccountBalancesContextProvider>
+            </PrivateWalletContextProvider>
+          </MetamaskContextProvider>
+        </UsdPricesContextProvider>
+      </BasePage>
     </ConfigContextProvider>
   );
 }

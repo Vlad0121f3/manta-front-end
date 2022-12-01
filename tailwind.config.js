@@ -16,6 +16,9 @@ module.exports = {
       '5xl': '3rem',
       '6xl': '4rem'
     },
+    letterSpacing: {
+      tightest: '-.075em',
+    },
     minWidth: {
       layout: 'var(--min-width-layout)',
       table: 'var(--min-width-table)',
@@ -41,14 +44,23 @@ module.exports = {
         success: 'var(--color-bg-success)',
         danger: 'var(--color-bg-danger)',
         'manta-gray': 'var(--color-bg-manta-gray)',
-        button: 'var(--color-bg-button-primary)',
-        'button-secondary': 'var(--color-bg-button-secondary)',
+        button: 'var(--color-bg-button)',
+        'manta-button-blue':'#2B49EA',
+        'manta-button-green':"#00AFA5",
+        'manta-button-light-blue': "#0E50FC"
+      },
+      width: {
+        '140':'35rem'
+      },
+      Height: {
+        '81.5': '20.375rem'
       },
       textColor: {
         accent: 'var(--color-text-accent)',
         primary: 'var(--color-text-primary) !important',
         secondary: 'var(--color-text-secondary)',
         thirdry: 'var(--color-text-thirdry)',
+        fourth: 'var(--color-text-fourth)',
         link: 'var(--color-bg-button)',
         warning: 'var(--color-text-warning)',
         'gray-light': 'var(--color-text-gray)',
@@ -63,7 +75,7 @@ module.exports = {
       borderColor: {
         'manta-gray': 'var(--color-bg-manta-gray)',
         primary: 'var(--color-border-primary)',
-        secondary: 'var(--color-bg-button)'
+        secondary: 'var(--color-border-secondary)'
       }
     }
   },

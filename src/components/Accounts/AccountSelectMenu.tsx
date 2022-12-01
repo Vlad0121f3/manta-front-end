@@ -51,7 +51,7 @@ const DisplayAccountsButton = () => {
           {externalAccount?.meta.name}
         </div>
         {showAccountList && (
-          <div className="flex flex-col mt-3 absolute right-0 top-full border border-white border-opacity-20 rounded-lg text-black dark:text-white">
+          <div className="w-80 flex flex-col mt-3 absolute right-0 top-full border border-white border-opacity-20 rounded-lg text-black dark:text-white">
             <div className="flex flex-row items-center justify-between bg-fourth rounded-t-lg">
               <div className="flex flex-row items-center">
                 <WalletSelectBar

@@ -249,7 +249,7 @@ export const SendContextProvider = (props) => {
       fetchSenderBalance();
       fetchReceiverBalance();
       fetchFeeBalance();
-    }, 200);
+    }, 1000);
     return () => clearInterval(interval);
   }, [
     senderAssetType,
@@ -517,7 +517,6 @@ export const SendContextProvider = (props) => {
     txWouldDepleteSuggestedMinFeeBalance,
     isValidToSend,
     setSenderAssetTargetBalance,
-    receiverAssetType,
     toggleSenderIsPrivate,
     toggleReceiverIsPrivate,
     setSelectedAssetType,
@@ -530,7 +529,6 @@ export const SendContextProvider = (props) => {
     senderIsPrivate,
     receiverIsPrivate,
     senderIsPublic,
-    receiverIsPrivate,
     ...state
   };
 

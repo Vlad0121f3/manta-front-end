@@ -57,7 +57,7 @@ const ChangeThemeMenuItem = ({theme, setTheme, name, icon}) => (
     </div>
     <FontAwesomeIcon
       icon={icon}
-      className="items-center w-4 h-5 text-xl text-black dark:text-white dark:hover:text-link"
+      className="items-center w-4 h-5 text-xl text-white dark:hover:text-link"
     />
   </div>
 );
@@ -86,7 +86,7 @@ const Menu = () => {
   };
 
   const DotMenuContent = () => (
-    <div className="w-48 h-68 flex-column flex-grow mt-3 bg-secondary rounded-3xl gap-y-4 p-5 absolute right-0 top-full z-50 border border-manta-gray">
+    <div className="w-48 h-68 flex-column flex-grow mt-3 bg-primary rounded-3xl gap-y-4 p-5 absolute right-0 top-full z-50 border border-manta-gray">
       {theme === themeType.Dark ? <ChangeThemeMenuItem theme={themeType.Light} setTheme={setTheme} name={'Light Mode'} icon={faSun} /> : <ChangeThemeMenuItem theme={themeType.Dark} setTheme={setTheme} name={'Dark Mode'} icon={faMoon} />}
       <MenuItem link={config.TWITTER_URL} name={'Twitter'} icon={faTwitter}/>
       <MenuItem link={links.DISCORD_URL} name={'Discord'} icon={faDiscord}/>
@@ -109,10 +109,7 @@ const Menu = () => {
             isOpen ? setIsOpen(false) : setIsOpen(true);
           }}
         >
-          <FontAwesomeIcon
-            icon={faEllipsis}
-            className="text-xl text-black dark:text-white"
-          />
+          <FontAwesomeIcon icon={faEllipsis} className="text-xl text-white" />
         </div>
         {isOpen && <DotMenuContent />}
       </OutsideClickHandler>

@@ -50,7 +50,8 @@ export default class AssetType {
     numberOfDecimals,
     publicExistentialDeposit,
     isPrivate,
-    isNativeToken
+    coingeckoId,
+    isNativeToken = false
   ) {
     this.assetId = assetId;
     this.baseName = baseName;
@@ -63,6 +64,7 @@ export default class AssetType {
     this.existentialDeposit = isPrivate ? new BN(0) : publicExistentialDeposit;
     this.isPrivate = isPrivate;
     this.isNativeToken = isNativeToken;
+    this.coingeckoId = coingeckoId;
   }
 
   static Native(config) {
@@ -82,7 +84,8 @@ export default class AssetType {
       18,
       new BN('100000000000000000'),
       isPrivate,
-      true,
+      'dolphin',
+      true
     );
   }
 
@@ -95,10 +98,10 @@ export default class AssetType {
       12,
       new BN('100000000000'),
       isPrivate,
-      true,
+      'calamari-network',
+      true
     );
   }
-
 
   static Karura(config, isPrivate) {
     return new AssetType(
@@ -109,22 +112,9 @@ export default class AssetType {
       12,
       new BN('100000000000'),
       isPrivate,
-      false,
+      'karura'
     );
   }
-
-  static AcalaDollar(config, isPrivate) {
-    return new AssetType(
-      getAssetIds(config).AUSD,
-      'Acala Dollar',
-      'aUSD',
-      Svgs.AusdIcon,
-      12,
-      new BN('10000000000'),
-      isPrivate
-    );
-  }
-
   static Kusama(config, isPrivate) {
     return new AssetType(
       getAssetIds(config).KSM,
@@ -134,20 +124,7 @@ export default class AssetType {
       12,
       new BN('500000000'),
       isPrivate,
-      false,
-    );
-  }
-
-  static KaruraLiquidKusama(config, isPrivate) {
-    return new AssetType(
-      getAssetIds(config).LKSM,
-      'Karura Liquid Kusama',
-      'LKSM',
-      Svgs.KusamaIcon,
-      12,
-      new BN('500000000'),
-      isPrivate,
-      false,
+      'kusama'
     );
   }
 
@@ -159,7 +136,8 @@ export default class AssetType {
       Svgs.RocIcon,
       12,
       new BN('1'),
-      isPrivate
+      isPrivate,
+      'rococo'
     );
   }
 
@@ -171,7 +149,8 @@ export default class AssetType {
       Svgs.KbtcIcon,
       8,
       new BN('1'),
-      isPrivate
+      isPrivate,
+      'bitcoin'
     );
   }
 
@@ -183,7 +162,8 @@ export default class AssetType {
       Svgs.MovrIcon,
       18,
       new BN('10000000000000000'),
-      isPrivate
+      isPrivate,
+      'moonriver'
     );
   }
 
@@ -198,8 +178,6 @@ export default class AssetType {
     } else if (config.NETWORK_NAME === "Calamari") {
       return [
         AssetType.Karura(config, isPrivate),
-        AssetType.AcalaDollar(config, isPrivate),
-        AssetType.KaruraLiquidKusama(config, isPrivate),
         AssetType.Moonriver(config, isPrivate),
         AssetType.Kusama(config, isPrivate),
         AssetType.Calamari(config, isPrivate)

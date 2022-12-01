@@ -4,15 +4,17 @@ import AccountSelectMenu from 'components/Accounts/AccountSelectMenu';
 import Menu from 'components/Menu/DotMenu';
 import Navs from './Navs';
 import ChainSelector from './ChainSelector';
-import SignerConnectionStatusLabel from './SignerConnectionStatusLabel';
+import ZkAccountButton from './ZkAccountButton';
+import { usePrivateWallet } from 'contexts/privateWalletContext';
 
-export const Navbar = ({shouldShowZkAccount}) => {
+export const Navbar = () => {
+  const isSendPage = window?.location?.pathname?.includes('dolphin/transact');
   return (
     <div className="h-20 py-4 px-10 flex justify-between items-center relative sticky left-0 right-0 top-0 z-50 bg-primary">
       <ChainSelector className='justify-self-start' />
       <Navs />
       <div className="h-12 gap-4 flex flex-wrap space-x-6 justify-end items-center">
-        {shouldShowZkAccount && <SignerConnectionStatusLabel />}
+        {isSendPage && <ZkAccountButton />}
         <AccountSelectMenu />
         <Menu />
       </div>

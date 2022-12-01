@@ -1,6 +1,5 @@
 // @ts-nocheck
 import React from 'react';
-import { MetamaskContextProvider } from 'contexts/metamaskContext';
 import { BridgeDataContextProvider } from './BridgeContext/BridgeDataContext';
 import { BridgeTxContextProvider } from './BridgeContext/BridgeTxContext';
 import PageContent from 'components/PageContent';

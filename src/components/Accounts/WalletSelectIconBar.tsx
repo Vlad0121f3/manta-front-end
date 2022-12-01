@@ -26,7 +26,7 @@ const SubstrateWallets = ({ isMetamaskSelected, setIsMetamaskSelected }) => {
       key={wallet.extensionName}
       onClick={onIconClickHandler(wallet)}
     >
-      <img className="w-8 h-8" src={wallet.logo.src} alt={wallet.logo.alt} />
+      <img className="w-6 h-6 max-w-6 max-h-6" src={wallet.logo.src} alt={wallet.logo.alt} />
     </button>
   ));
 };
@@ -40,7 +40,7 @@ const MetamaskWallet = ({ isMetamaskSelected, setIsMetamaskSelected }) => (
       setIsMetamaskSelected(true);
     }}
   >
-    <img className="w-8 h-8" src={Svgs.Metamask} alt={'metamask'} />
+    <img className="w-6 h-6 max-w-6 max-h-6" src={Svgs.Metamask} alt={'metamask'} />
   </button>
 );
 

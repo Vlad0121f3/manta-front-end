@@ -1,10 +1,6 @@
 // @ts-nocheck
 import React, { useEffect } from 'react';
 import Svgs from 'resources/icons';
-import MissingRequiredSoftwareModal from 'components/Modal/missingRequiredSoftwareModal';
-import signerIsOutOfDate from 'utils/validation/signerIsOutOfDate';
-import { usePrivateWallet } from 'contexts/privateWalletContext';
-import NewerSignerVersionRequiredModal from 'components/Modal/newerSignerVersionRequiredModal';
 import { useConfig } from 'contexts/configContext';
 import DowntimeModal from 'components/Modal/downtimeModal';
 import MobileNotSupportedModal from 'components/Modal/mobileNotSupported';
@@ -16,7 +12,6 @@ import SendToForm from './SendToForm';
 const SendForm = () => {
   const config = useConfig();
   const { keyring } = useKeyring();
-  const { signerVersion } = usePrivateWallet();
 
   useEffect(() => {
     if (keyring) {
@@ -31,10 +26,6 @@ const SendForm = () => {
     warningModal = <DowntimeModal />;
   } else if (userIsMobile()) {
     warningModal = <MobileNotSupportedModal />;
-  } else if (signerIsOutOfDate(config, signerVersion)) {
-    warningModal = <NewerSignerVersionRequiredModal />;
-  } else {
-    warningModal = <MissingRequiredSoftwareModal />;
   }
 
   return (
