@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React, { useState } from 'react';
 import MantaIcon from 'resources/images/manta.png';
 import OutsideClickHandler from 'react-outside-click-handler';
@@ -10,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import signerIsOutOfDate from 'utils/validation/signerIsOutOfDate';
 import { useConfig } from 'contexts/configContext';
+import classNames from 'classnames';
 
 const ZkAccountDisplay = () => {
   const [showZkModal, setShowZkModal] = useState(false);
@@ -50,13 +52,11 @@ const ZkAccountSignerOutOfDate = () => {
   );
 };
 
-const ZkAccountConnect = () => {
+export const ZkAccountConnect = ({ className='' }) => {
   const { ModalWrapper, showModal } = useModal();
   return (
     <>
-      <button
-        className="bg-connect-signer-button text-white py-3 px-4 font-medium cursor-pointer rounded-lg"
-        onClick={showModal}>
+      <button className={classNames(className)} onClick={showModal}>
         Connect Signer
       </button>
       <ModalWrapper>
@@ -75,7 +75,13 @@ const ZkAccountButton = () => {
   } else if (signerIsOutOfDate(config, signerVersion)) {
     return <ZkAccountSignerOutOfDate />;
   } else {
-    return <ZkAccountConnect />;
+    return (
+      <ZkAccountConnect
+        className={
+          'bg-connect-signer-button text-white py-3 px-4 font-medium cursor-pointer rounded-lg'
+        }
+      />
+    );
   }
 };
 

@@ -82,7 +82,12 @@ const AccountSelectMenu = () => {
   return externalAccount ? (
     <DisplayAccountsButton />
   ) : (
-    <ConnectWallet isButtonShape={true} />
+    <ConnectWallet
+      isButtonShape={true}
+      className={
+        'bg-connect-wallet-button text-white py-3 px-4 font-medium cursor-pointer rounded-lg'
+      }
+    />
   );
 };
 
