@@ -86,28 +86,29 @@ const BridgeDestinationInput = () => {
     )
   }
 
+  const placeholderMsg = `Enter ${
+    originChain?.xcmAdapter?.chain?.type === 'ethereum' ? 'Substrate' : 'Metamask'} Address`;
+
   return (
-    <div
-    className='flex items-center flex-grow h-16 mx-1'
-  >
-    <input
-      id="recipientAddress"
-      className="w-96 h-full rounded-lg manta-bg-gray px-5 text-black dark:text-white outline-none rounded-lg"
-      onChange={(e) => onChangeDestinationtInput(e.target.value)}
-      value={inputValue}
-      disabled={disabled}
-      placeholder={'Enter Destination Address'}
-    />
-    <button
-      onClick={onClickGetAddress}
-      className={classNames('w-32 ml-1 h-full rounded-lg text-black',
-        'dark:text-white outline-none rounded-2xl border-2 border-solid border-blue-500',
-        'text-xs text-black dark:text-white'
-     )}
-    >
-      <ButtonContents />
-    </button>
-  </div>
+    <div className="flex items-center flex-grow h-16 mx-1">
+      <input
+        id="recipientAddress"
+        className="w-96 h-full rounded-lg manta-bg-gray px-5 text-black dark:text-white outline-none rounded-lg"
+        onChange={(e) => onChangeDestinationtInput(e.target.value)}
+        value={inputValue}
+        disabled={disabled}
+        placeholder={placeholderMsg}
+      />
+      <button
+        onClick={onClickGetAddress}
+        className={classNames(
+          'w-32 ml-1 h-full rounded-lg text-black',
+          'dark:text-white outline-none rounded-2xl border-2 border-solid border-blue-500',
+          'text-xs text-black dark:text-white'
+        )}>
+        <ButtonContents />
+      </button>
+    </div>
   );
 };
 

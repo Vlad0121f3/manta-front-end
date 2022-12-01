@@ -4,8 +4,7 @@ import { useExternalAccount } from 'contexts/externalAccountContext';
 import { useKeyring } from 'contexts/keyringContext';
 import { useTxStatus } from 'contexts/txStatusContext';
 import { useMetamask } from 'contexts/metamaskContext';
-import { useBridgeData } from 'pages/BridgePage/BridgeContext/BridgeDataContext';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import OutsideClickHandler from 'react-outside-click-handler';
 import Svgs from 'resources/icons';
 import WalletSelectBar from './WalletSelectIconBar';
@@ -14,10 +13,10 @@ import AccountSelectDropdown from './AccountSelectDropdown';
 
 const DisplayAccountsButton = () => {
   const { txStatus } = useTxStatus();
+  const { ethAddress } = useMetamask();
   const disabled = txStatus?.isProcessing();
   const { selectedWallet } = useKeyring();
   const { externalAccount } = useExternalAccount();
-  const { destinationChain, originChain } = useBridgeData();
   const [showAccountList, setShowAccountList] = useState(false);
   const [isMetamaskSelected, setIsMetamaskSelected] = useState(false);
 
@@ -25,9 +24,24 @@ const DisplayAccountsButton = () => {
     !disabled && setShowAccountList(!showAccountList);
   };
 
-  const isMoonriverEnabled =
-    originChain?.xcmAdapter?.chain?.type === 'ethereum' ||
-    destinationChain?.xcmAdapter?.chain?.type;
+  const isMetamaskEnabled =
+    !!ethAddress && window?.location?.pathname?.includes('dolphin/bridge');
+
+  const ExternalAccountBlock = ({text}) => {
+    return (
+      <>
+        <img
+          className="w-6 h-6"
+          src={selectedWallet.logo.src}
+          alt={selectedWallet.logo.alt}
+        />
+        {isMetamaskEnabled && (
+          <img className="w-6 h-6" src={Svgs.Metamask} alt={'metamask'} />
+        )}
+        {text}
+      </>
+    );
+  }
 
   return (
     <div className="relative">
@@ -38,17 +52,10 @@ const DisplayAccountsButton = () => {
             'font-medium cursor-pointer rounded-lg items-center',
             { disabled: disabled }
           )}
-          onClick={onClickAccountSelect}
-        >
-          <img
-            className="w-6 h-6"
-            src={selectedWallet.logo.src}
-            alt={selectedWallet.logo.alt}
+          onClick={onClickAccountSelect}>
+          <ExternalAccountBlock
+            text={isMetamaskEnabled ? 'Connected' : externalAccount?.meta.name}
           />
-          {isMoonriverEnabled && (
-            <img className="w-6 h-6" src={Svgs.Metamask} alt={'metamask'} />
-          )}
-          {externalAccount?.meta.name}
         </div>
         {showAccountList && (
           <div className="w-80 flex flex-col mt-3 absolute right-0 top-full border border-white border-opacity-20 rounded-lg text-black dark:text-white">
@@ -82,7 +89,12 @@ const AccountSelectMenu = () => {
   return externalAccount ? (
     <DisplayAccountsButton />
   ) : (
-    <ConnectWallet isButtonShape={true} />
+    <ConnectWallet
+      isButtonShape={true}
+      className={
+        'bg-manta-button-green text-white py-3 px-4 font-medium cursor-pointer rounded-lg z-10'
+      }
+    />
   );
 };
 
