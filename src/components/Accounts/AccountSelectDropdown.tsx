@@ -34,11 +34,6 @@ const SingleAccountDisplay = ({
     ? `${config.ETHERSCAN_URL}/address/${accountAddress}`
     : `${config.SUBSCAN_URL}/account/${accountAddress}`;
 
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(accountAddress);
-    return false;
-  };
-
   const BlockExplorerButton = () => (
     <a
       className="place-self-center"
@@ -111,7 +106,7 @@ const AccountSelectDropdown = ({ isMetamaskSelected }) => {
 
   return isMetamaskSelected ? (
     <SingleAccountDisplay
-      accountName={'Metamask Account'}
+      accountName={'Metamask'}
       accountAddress={ethAddress}
       isAccountSelected={true}
       isMetamaskSelected={isMetamaskSelected}

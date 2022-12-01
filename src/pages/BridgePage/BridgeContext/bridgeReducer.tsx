@@ -249,7 +249,8 @@ const switchOriginAndDestination = (state) => {
       senderNativeAssetCurrentBalance: null,
       senderAssetCurrentBalance: null,
       originFee: null,
-      destinationFee: null
+      destinationFee: null,
+      destinationAddress: null
     }
   }
 }

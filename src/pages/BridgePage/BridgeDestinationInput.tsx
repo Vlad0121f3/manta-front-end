@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import classNames from 'classnames';
 import { useTxStatus } from 'contexts/txStatusContext';
 import { useBridgeData } from './BridgeContext/BridgeDataContext';
@@ -12,12 +12,17 @@ import { useKeyring } from 'contexts/keyringContext';
 
 const BridgeDestinationInput = () => {
   const { ethAddress } = useMetamask();
-  const { setDestinationAddress, destinationAddress, destinationChain } = useBridgeData();
+  const { setDestinationAddress, destinationAddress, destinationChain, originChain } = useBridgeData();
   const { selectedWallet } = useKeyring();
   const { externalAccount } = useExternalAccount();
   const { txStatus } = useTxStatus();
   const disabled = txStatus?.isProcessing();
-  const [inputValue, setInputValue] = useState('')
+  const [inputValue, setInputValue] = useState('');
+
+  // Clear input if origin and destination chain are swapped
+  useEffect(() => {
+    setInputValue('');
+  }, [originChain, destinationChain])
 
   const destinationIsEvmChain = destinationChain.xcmAdapter.chain.type === 'ethereum';
 
@@ -30,8 +35,8 @@ const BridgeDestinationInput = () => {
 
   const onChangeDestinationtInput = (value) => {
     if (value === '') {
-      setInputValue(null);
-      setDestinationAddress('');
+      setInputValue('');
+      setDestinationAddress(null);
     } else if (validateAddress(value)) {
       setInputValue(value);
       setDestinationAddress(value)
@@ -51,7 +56,7 @@ const BridgeDestinationInput = () => {
 
   const getAddressIcon = () => {
     if (destinationIsEvmChain) {
-      return Svgs.Metamask
+      return <img className="w-6 h-6" src={Svgs.Metamask} alt={'metamask'} />
     } else {
       return <img className="w-6 h-6" src={selectedWallet.logo.src} alt={selectedWallet.logo.alt} />
     }
@@ -91,7 +96,7 @@ const BridgeDestinationInput = () => {
       onChange={(e) => onChangeDestinationtInput(e.target.value)}
       value={inputValue}
       disabled={disabled}
-      placeholder={'destination address'}
+      placeholder={'Enter Destination Address'}
     />
     <button
       onClick={onClickGetAddress}
