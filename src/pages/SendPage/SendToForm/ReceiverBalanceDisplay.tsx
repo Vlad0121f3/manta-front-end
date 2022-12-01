@@ -43,7 +43,7 @@ const ReceiverBalanceDisplay = () => {
       </div>
       <BalanceDisplay
         balance={balanceString}
-        className="absolute text-white right-0 bottom-0 mr-6 mt-2.5 h-8 flex flex-row gap-1 text-xs"
+        className="absolute text-white right-0 bottom-3 mr-6 mt-2.5 text-xs"
         loader={shouldShowLoader}
       />
     </div>

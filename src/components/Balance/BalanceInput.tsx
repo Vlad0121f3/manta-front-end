@@ -43,7 +43,7 @@ const BalanceInput = ({
       </div>
       <BalanceDisplay
         balance={balanceText}
-        className="text-xs text-white mt-2.5 mr-6 absolute right-0 bottom-0 h-8"
+        className="text-xs text-white mt-2.5 mr-6 absolute right-0 bottom-3 gap-1"
         loader={shouldShowLoader}
       />
     </div>
