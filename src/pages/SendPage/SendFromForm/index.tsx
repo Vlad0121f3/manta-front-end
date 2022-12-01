@@ -1,36 +1,27 @@
 // @ts-nocheck
 import React from 'react';
-import PublicFromAccountSelect from 'pages/SendPage/SendFromForm/PublicFromAccountSelect';
 import PublicPrivateToggle from 'pages/SendPage/PublicPrivateToggle';
 import { useSend } from '../SendContext';
 import SendAssetSelect from './SendAssetSelect';
-import PrivateFromAccountSelect from './PrivateFromAccountSelect';
-
-const WarningText = () => {
-  const {
-    userHasSufficientFunds,
-    txWouldDepleteSuggestedMinFeeBalance,
-    senderAssetType
-  } = useSend();
-
-  if (userHasSufficientFunds() === false) {
-    return <p className="text-xss text-red-500 ml-2">Insufficient balance</p>;
-  } else if (txWouldDepleteSuggestedMinFeeBalance()) {
-    const feeWarningText = `You need ${senderAssetType.ticker} to pay fees; consider retaining a small balance.`;
-    return (
-      <p className="text-xss tracking-tight text-yellow-500 ml-2">
-        {feeWarningText}
-      </p>
-    );
-  } else {
-    return (
-      <p className="text-xss text-red-500 ml-2 invisible">Sufficient balance</p>
-    );
-  }
-};
+import FormErrorText from 'components/Error/FormErrorText';
 
 const SendFromForm = () => {
-  const { toggleSenderIsPrivate, senderAssetType } = useSend();
+  const {
+    toggleSenderIsPrivate,
+    senderAssetType,
+    userHasSufficientFunds,
+    txWouldDepleteSuggestedMinFeeBalance
+  } = useSend();
+
+  let errorText = null;
+  if (userHasSufficientFunds() === false) {
+    errorText = 'Insufficient balance';
+  }
+
+  let warningText = null;
+  if (txWouldDepleteSuggestedMinFeeBalance()) {
+    warningText = `You need ${senderAssetType.ticker} to pay fees; consider retaining a small balance.`
+  }
 
   return (
     <div className="flex-y space-y-1">
@@ -40,16 +31,12 @@ const SendFromForm = () => {
           isPrivate={senderAssetType.isPrivate}
           prefix="sender"
         />
-        <div className="w-100 items-center flex-grow">
-          {senderAssetType.isPrivate ? (
-            <PrivateFromAccountSelect />
-          ) : (
-            <PublicFromAccountSelect />
-          )}
-        </div>
       </div>
       <SendAssetSelect />
-      <WarningText />
+      <FormErrorText
+        errorText={errorText}
+        warningText={warningText}
+      />
     </div>
   );
 };

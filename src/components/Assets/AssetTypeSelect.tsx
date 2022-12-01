@@ -4,16 +4,16 @@ import PropTypes from 'prop-types';
 import Select, { components } from 'react-select';
 import { useTxStatus } from 'contexts/txStatusContext';
 import AssetType from 'types/AssetType';
-import GradientText from 'components/GradientText';
 import classNames from 'classnames';
-import { useSend } from '../SendContext';
 
-const SendAssetTypeDropdown = () => {
+const AssetTypeSelect = ({
+  assetType,
+  assetTypeOptions,
+  setSelectedAssetType
+}) => {
   const { txStatus } = useTxStatus();
   const disabled = txStatus?.isProcessing();
-  const { senderAssetType, senderAssetTypeOptions, setSelectedAssetType } =
-    useSend();
-  const dropdownOptions = senderAssetTypeOptions.map((assetType) => {
+  const dropdownOptions = assetTypeOptions?.map((assetType) => {
     return {
       id: `assetType_${assetType.ticker}`,
       key: assetType.assetId,
@@ -23,7 +23,7 @@ const SendAssetTypeDropdown = () => {
   });
 
   const onChangeAssetType = (option) => {
-    if (option.value.assetId !== senderAssetType.assetId) {
+    if (option.value.assetId !== assetType.assetId) {
       setSelectedAssetType(option.value);
     }
   };
@@ -32,26 +32,27 @@ const SendAssetTypeDropdown = () => {
     <Select
       id="selectedAssetType"
       className={classNames(
-        '!absolute right-2 top-2 gradient-border rounded-2xl text-black dark:text-white',
+        '!absolute right-2 top-2 manta-bg-gray rounded-2xl whitespace-nowrap text-black dark:text-white',
         { disabled: disabled }
       )}
       isSearchable={false}
-      value={senderAssetType}
+      value={assetType}
       onChange={onChangeAssetType}
       options={dropdownOptions}
       isDisabled={disabled}
-      placeholder=""
+      placeholder="--"
       styles={dropdownStyles(disabled)}
       components={{
-        SingleValue: SendAssetTypeSingleValue,
-        Option: SendAssetTypeOption,
+        Control: AssetTypeControl,
+        SingleValue: AssetTypeSingleValue,
+        Option: AssetTypeOption,
         IndicatorSeparator: EmptyIndicatorSeparator
       }}
     />
   );
 };
 
-SendAssetTypeDropdown.propTypes = {
+AssetTypeSelect.propTypes = {
   selectedOption: PropTypes.instanceOf(AssetType),
   setSelectedOption: PropTypes.func,
   optionsArePrivate: PropTypes.bool
@@ -88,7 +89,7 @@ const dropdownStyles = (disabled) => {
     }),
     menu: (provided) => ({
       ...provided,
-      width: '250%'
+      width: '200%'
     }),
     container: () => ({
       position: 'absolute'
@@ -100,16 +101,22 @@ const EmptyIndicatorSeparator = () => {
   return <div />;
 };
 
-const SendAssetTypeSingleValue = ({ data }) => {
+const AssetTypeControl = (props) => {
   return (
-    <div className="pl-2 border-0 flex items-center gap-3">
+      <components.Control {...props} />
+  );
+};
+
+const AssetTypeSingleValue = ({ data }) => {
+  return (
+    <div className="pl-2 border-0 flex items-center gap-3 mr-2">
       <img className="w-8 h-8 rounded-full" src={data.icon} alt="icon" />
-      <GradientText className="text-2xl font-bold" text={data.ticker} />
+      <div className="text-2xl font-bold">{data.ticker}</div>
     </div>
   );
 };
 
-const SendAssetTypeOption = (props) => {
+const AssetTypeOption = (props) => {
   const { value, innerProps } = props;
   return (
     <div {...innerProps}>
@@ -126,4 +133,4 @@ const SendAssetTypeOption = (props) => {
   );
 };
 
-export default SendAssetTypeDropdown;
+export default AssetTypeSelect;

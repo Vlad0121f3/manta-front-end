@@ -47,16 +47,23 @@ export default class Balance {
     return valueBaseUnits;
   }
 
-  toString(shouldFormat, decimals = 3) {
-    return !shouldFormat
-      ? this.valueBaseUnits().toDecimalPlaces(decimals, Decimal.ROUND_DOWN).toString()
-      : `${this.valueBaseUnits()
-        .toDecimalPlaces(decimals, Decimal.ROUND_DOWN)
-        .toNumber()
-        .toLocaleString(undefined, {
-          maximumFractionDigits: decimals,
-          minimumFractionDigits: 0,
-        })} ${this.assetType.ticker}`;
+  toString(decimals = 3) {
+    return this.valueBaseUnits().toDecimalPlaces(decimals, Decimal.ROUND_DOWN).toString()
+  };
+
+  toDisplayString(decimals = 3, roundDown = true) {
+    const rounding = roundDown ? Decimal.ROUND_DOWN : Decimal.ROUND_UP;
+    return `${this.valueBaseUnits()
+      .toDecimalPlaces(decimals, rounding)
+      .toNumber()
+      .toLocaleString(undefined, {
+        maximumFractionDigits: decimals,
+        minimumFractionDigits: 0,
+      })} ${this.assetType.ticker}`;
+  }
+
+  toFeeDisplayString() {
+    return this.toDisplayString(6, false)
   }
 
   toUsd(usdPerToken) {

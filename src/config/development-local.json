@@ -1,0 +1,24 @@
+{
+    "DOLPHIN_PROVIDER_SOCKET": "wss://ws.rococo.dolphin.engineering",
+    "CALAMARI_PROVIDER_SOCKET": "wss://c5.calamari.seabird.systems",
+    "DEV_CONSOLE": true,
+    "NODES": [{
+            "name": "Calamari",
+            "path": "/calamari",
+            "url": "wss://c5.calamari.seabird.systems",
+            "explorer": "calamari.subscan.io"
+        },
+        {
+            "name": "Dolphin",
+            "path": "/dolphin",
+            "url": "ws://127.0.0.1:9800",
+            "testnet": true,
+            "explorer": "dolphin.subscan.io"
+        }
+    ],
+    "ROCOCO_SOCKET": "ws://127.0.0.1:9944",
+    "DOLPHIN_SOCKET": "ws://127.0.0.1:9800",
+    "KARURA_SOCKET": "ws://127.0.0.1:9804",
+    "MOONRIVER_SOCKET": "ws://127.0.0.1:9802",
+    "MOONRIVER_RPC": "http://127.0.0.1:9972"
+}
