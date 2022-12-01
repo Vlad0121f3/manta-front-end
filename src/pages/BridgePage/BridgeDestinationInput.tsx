@@ -53,7 +53,7 @@ const BridgeDestinationInput = () => {
     if (destinationIsEvmChain) {
       return Svgs.Metamask
     } else {
-      return <img className="w-6 h-6 w-100" src={selectedWallet.logo.src} alt={selectedWallet.logo.alt} />
+      return <img className="w-6 h-6" src={selectedWallet.logo.src} alt={selectedWallet.logo.alt} />
     }
   }
 
@@ -67,12 +67,12 @@ const BridgeDestinationInput = () => {
 
   const ButtonContents = () => {
     return (
-      <span className='max-w-28 flex justify-center whitespace-nowrap overflow-hidden'>
+      <span className='w-32 px-1 flex justify-center whitespace-nowrap overflow-hidden'>
         {
           destinationAddress ? (
           <>
-          <i className='w-100 inline-block'>{getAddressIcon()}</i>
-          <p className='max-w-16 inline-block pt-0.5 ml-1 overflow-hidden'>{getAccountName()}</p>
+          <div className='block w-5 mr-1 min-w-full min-h-full'><i >{getAddressIcon()}</i></div>
+          <p className='block min-w-0 w-20 inline-block pt-0.5  overflow-hidden overflow-ellipsis'>{getAccountName()}</p>
           </>
           )
           : 'Get Address'
@@ -91,13 +91,13 @@ const BridgeDestinationInput = () => {
       onChange={(e) => onChangeDestinationtInput(e.target.value)}
       value={inputValue}
       disabled={disabled}
-      placeholder={'address'}
+      placeholder={'destination address'}
     />
     <button
       onClick={onClickGetAddress}
-      className={classNames('w-32 ml-1 h-full rounded-lg px-1 text-black',
+      className={classNames('w-32 ml-1 h-full rounded-lg text-black',
         'dark:text-white outline-none rounded-2xl border-2 border-solid border-blue-500',
-        'text-xs  text-black dark:text-white'
+        'text-xs text-black dark:text-white'
      )}
     >
       <ButtonContents />
