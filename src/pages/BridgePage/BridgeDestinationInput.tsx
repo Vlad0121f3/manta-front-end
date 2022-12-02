@@ -87,7 +87,7 @@ const BridgeDestinationInput = () => {
   }
 
   const placeholderMsg = `Enter ${
-    originChain?.xcmAdapter?.chain?.type === 'ethereum' ? 'Substrate' : 'Metamask'} Address`;
+    originChain?.xcmAdapter?.chain?.type === 'ethereum' ? 'substrate' : 'EVM'} Address`;
 
   return (
     <div className="flex items-center flex-grow h-16 mx-1">

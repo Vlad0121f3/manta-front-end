@@ -15,8 +15,8 @@ const envVars = envVarNames.reduce((mem, n) => {
 }, {});
 
 export const dolphinConfig = { ...configCommon, ...configDolphin, ...configEnv, ...envVars };
-dolphinConfig.PROVIDER_SOCKET = dolphinConfig.DOLPHIN_PROVIDER_SOCKET;
+dolphinConfig.PROVIDER_SOCKET = dolphinConfig.DOLPHIN_SOCKET;
 
 export const calamariConfig = { ...configCommon, ...configCalamari, ...configEnv, ...envVars };
-calamariConfig.PROVIDER_SOCKET = calamariConfig.CALAMARI_PROVIDER_SOCKET;
+calamariConfig.PROVIDER_SOCKET = calamariConfig.CALAMARI_SOCKET;
 

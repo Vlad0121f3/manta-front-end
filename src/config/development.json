@@ -1,6 +1,5 @@
 {
-    "DOLPHIN_PROVIDER_SOCKET": "wss://c3.dolphin.seabird.systems",
-    "CALAMARI_PROVIDER_SOCKET": "wss://c5.calamari.seabird.systems",
+    "CALAMARI_SOCKET": "wss://c5.calamari.seabird.systems",
     "DEV_CONSOLE": true,
     "NODES": [{
             "name": "Calamari",
@@ -15,11 +14,5 @@
             "testnet": true,
             "explorer": "dolphin.subscan.io"
         }
-    ],
-    "DOLPHIN_SOCKET": "wss://c3.dolphin.seabird.systems",
-    "KUSAMA_SOCKET": "wss://v1.internal.kusama.systems/0",
-    "CALAMARI_SOCKET": "wss://c5.calamari.seabird.systems",
-    "KARURA_SOCKET": "wss://c1.acala.seabird.systems",
-    "MOONRIVER_SOCKET": "wss://c2.moonriver.seabird.systems",
-    "MOONRIVER_RPC": "https://c2.moonriver.seabird.systems/rpc"
+    ]
 }
