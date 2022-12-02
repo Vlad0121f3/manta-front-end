@@ -8,6 +8,7 @@ import Balance from './Balance';
 
 const ADDRESS_TO_COLLATOR_NAME_MAP = {
   dmxa3MJczFGT92BUQjwsxguUC2t5qFaDdagfpBQWdGkNPJYQ5: 'Anonstake',
+  dmwJT8yMLRzTPcNspYMvY6Cmjk7Nh6SNqsS99ykxyWF6MRpuK: 'PlusReward'
   dmup6erAb8iJHQ2UXyHkA1G6m1hnSLRM55PdSD7DDbN1Ww4ZN: 'Validatrium',
   dmzbaFDDoYwXrX7Fa5mT2SfLapMZD8dynXPH4JviFEmMQz9Fu: 'bwarelabs-collator-a',
   dmuuG83f3JeXBmMp7e3XssJzq7rUAuNgAT3z7HoUPWueqpD1V: 'lh',
