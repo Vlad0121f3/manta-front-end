@@ -4,13 +4,13 @@ import WALLET_NAME from 'constants/WalletConstants';
 import PropTypes from 'prop-types';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import {
-  getHasAuthToConnectPolkadotStorage,
-  getHasAuthToConnectTalismanStorage,
-  getHasAuthToConnectSubwalletStorage,
-  setHasAuthToConnectPolkadotStorage,
-  setHasAuthToConnectTalismanStorage,
-  setHasAuthToConnectSubwalletStorage
+  setHasAuthToConnectWalletStorage,
+  getHasAuthToConnectWalletStorage
 } from 'utils/persistence/connectAuthorizationStorage';
+import {
+  getLastAccessedWallet,
+  setLastAccessedWallet
+} from 'utils/persistence/walletStorage';
 import keyring from '@polkadot/ui-keyring';
 import { useConfig } from './configContext';
 import { getWallets } from '@talismn/connect-wallets';
@@ -25,36 +25,29 @@ export const KeyringContextProvider = (props) => {
   const [keyringAddresses, setKeyringAddresses] = useState([]);
   const [web3ExtensionInjected, setWeb3ExtensionInjected] = useState([]);
   const [selectedWallet, setSelectedWallet] = useState(null);
-
-  const [hasAuthToConnectPolkadot, setHasAuthToConnectPolkadot] = useState(
-    getHasAuthToConnectPolkadotStorage()
-  );
-  const [hasAuthToConnectTalisman, setHasAuthToConnectTalisman] = useState(
-    getHasAuthToConnectTalismanStorage()
-  );
-  const [hasAuthToConnectSubwallet, setHasAuthToConnectSubwallet] = useState(
-    getHasAuthToConnectSubwalletStorage()
+  const [hasAuthToConnectWallet, setHasAuthToConnectWallet] = useState(
+    getHasAuthToConnectWalletStorage()
   );
 
-  const hasAuthToConnectAnyWallet =
-    hasAuthToConnectPolkadot ||
-    hasAuthToConnectTalisman ||
-    hasAuthToConnectSubwallet;
-
-  const connectWalletExtension = (extensionName) => {
-    if (extensionName === WALLET_NAME.TALISMAN) {
-      setHasAuthToConnectTalismanStorage(true);
-      setHasAuthToConnectTalisman(true);
-    } else if (extensionName === WALLET_NAME.POLKADOT) {
-      setHasAuthToConnectPolkadotStorage(true);
-      setHasAuthToConnectPolkadot(true);
-    } else if (extensionName === WALLET_NAME.SUBWALLET) {
-      setHasAuthToConnectSubwalletStorage(true);
-      setHasAuthToConnectSubwallet(true);
+  const addWalletName = (walletName, walletNameList) => {
+    const copyWalletNameList = [...walletNameList];
+    if (!copyWalletNameList.includes(walletName)) {
+      copyWalletNameList.push(walletName);
+      return copyWalletNameList;
     }
   };
 
-  const subscribeWalletAccounts = async (wallet) => {
+  const removeWalletName = (walletName, walletNameList) => {
+    return walletNameList.filter((name) => name !== walletName);
+  };
+
+  const connectWalletExtension = (extensionName) => {
+    const walletNames = addWalletName(extensionName, hasAuthToConnectWallet);
+    setHasAuthToConnectWalletStorage(walletNames);
+    setHasAuthToConnectWallet(walletNames);
+  };
+
+  const subscribeWalletAccounts = async (wallet, saveToStorage = true) => {
     let unsubscribe = () => {};
     if (wallet) {
       wallet.enable(APP_NAME).then(() => {
@@ -80,6 +73,7 @@ export const KeyringContextProvider = (props) => {
             }
           });
           setSelectedWallet(wallet);
+          saveToStorage && setLastAccessedWallet(wallet);
           setKeyringAddresses(updatedAddresses);
         });
       });
@@ -115,7 +109,7 @@ export const KeyringContextProvider = (props) => {
   const initKeyring = async () => {
     let unsubscribe = () => {};
     if (
-      hasAuthToConnectAnyWallet &&
+      hasAuthToConnectWallet?.length > 0 &&
       !isKeyringInit &&
       web3ExtensionInjected.length !== 0
     ) {
@@ -132,13 +126,13 @@ export const KeyringContextProvider = (props) => {
 
   useEffect(() => {
     return initKeyring();
-  }, [hasAuthToConnectAnyWallet]);
+  }, [hasAuthToConnectWallet]);
 
   useEffect(() => {
     triggerInitKeyringWhenWeb3ExtensionsInjected();
   }, [waitExtensionCounter]);
 
-  const connectWallet = async (extensionName) => {
+  const connectWallet = async (extensionName, saveToStorage = true) => {
     if (!isKeyringInit) {
       return;
     }
@@ -146,22 +140,19 @@ export const KeyringContextProvider = (props) => {
     const selectedWallet = substrateWallets.find(
       (wallet) => wallet.extensionName === extensionName
     );
-    if (!selectedWallet.extension) {
+    if (!selectedWallet?.extension) {
       try {
-        await selectedWallet?.enable(APP_NAME);
-        subscribeWalletAccounts(selectedWallet);
+        await selectedWallet.enable(APP_NAME);
+        subscribeWalletAccounts(selectedWallet, saveToStorage);
       } catch (e) {
         console.log(e);
-        if (extensionName === WALLET_NAME.POLKADOT) {
-          setHasAuthToConnectPolkadotStorage(false);
-          setHasAuthToConnectPolkadot(false);
-        } else if (extensionName === WALLET_NAME.SUBWALLET) {
-          setHasAuthToConnectSubwalletStorage(false);
-          setHasAuthToConnectSubwallet(false);
-        } else if (extensionName === WALLET_NAME.TALISMAN) {
-          setHasAuthToConnectTalismanStorage(false);
-          setHasAuthToConnectTalisman(false);
-        }
+        const walletNames = removeWalletName(
+          extensionName,
+          hasAuthToConnectWallet
+        );
+
+        setHasAuthToConnectWalletStorage(walletNames);
+        setHasAuthToConnectWallet(walletNames);
       }
     }
   };
@@ -170,17 +161,19 @@ export const KeyringContextProvider = (props) => {
     if (!isKeyringInit) {
       return;
     }
-    if (hasAuthToConnectSubwallet) {
-      connectWallet(WALLET_NAME.SUBWALLET);
-    }
 
-    if (hasAuthToConnectTalisman) {
-      connectWallet(WALLET_NAME.TALISMAN);
-    }
+    const withoutLastAccessedWallet = removeWalletName(
+      getLastAccessedWallet()?.extensionName,
+      hasAuthToConnectWallet
+    );
 
-    if (hasAuthToConnectPolkadot) {
-      connectWallet(WALLET_NAME.POLKADOT);
-    }
+    withoutLastAccessedWallet?.map((walletName) => {
+      connectWallet(walletName, false);
+    });
+
+    setTimeout(() => {
+      connectWallet(getLastAccessedWallet()?.extensionName);
+    }, 200);
   }, [isKeyringInit]);
 
   const value = {
