@@ -2,7 +2,6 @@
     "NETWORK_NAME": "Dolphin",
     "SS58_FORMAT": 42,
     "SUBSCAN_URL": "https://dolphin.subscan.io",
-    "ETHERSCAN_URL": "https://etherscan.io",
     "TWITTER_URL": "https://twitter.com/mantanetwork",
     "DOLPHIN_SOCKET": "wss://c3.dolphin.seabird.systems",
     "KUSAMA_SOCKET": "wss://v1.internal.kusama.systems/0",

@@ -1,14 +1,9 @@
 // @ts-nocheck
-import { useEffect, useState } from 'react';
-import { useConfig } from 'contexts/configContext';
+import React from 'react';
 import { useMetamask } from 'contexts/metamaskContext';
 import { useExternalAccount } from 'contexts/externalAccountContext';
 import Svgs from 'resources/icons';
 import Identicon from '@polkadot/react-identicon';
-import {
-  faArrowUpRightFromSquare,
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import makeBlockie from 'ethereum-blockies-base64';
 import CopyPasteIcon from 'components/CopyPasteIcon';
 
@@ -19,37 +14,15 @@ const SingleAccountDisplay = ({
   isMetamaskSelected,
   onClickAccountHandler
 }) => {
-  const config = useConfig();
   const succinctAddress = `${accountAddress?.slice(
     0,
     5
-  )}...${accountAddress?.slice(-4)}`;
+  )}...${accountAddress?.slice(-5)}`;
 
   const succinctAccountName =
     accountName.length > 12
       ? `${accountName?.slice(0, 12)}...`
       : accountName;
-
-  const blockExplorerLink = isMetamaskSelected
-    ? `${config.ETHERSCAN_URL}/address/${accountAddress}`
-    : `${config.SUBSCAN_URL}/account/${accountAddress}`;
-
-  const BlockExplorerButton = () => (
-    <a
-      className="place-self-center"
-      onClick={(e) => e.stopPropagation()}
-      href={blockExplorerLink}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <FontAwesomeIcon
-        className="cursor-pointer w-3 h-3"
-        icon={faArrowUpRightFromSquare}
-        href={blockExplorerLink}
-      />
-    </a>
-  );
-
 
   const AccountIcon = () =>
     isMetamaskSelected ? (
@@ -80,9 +53,6 @@ const SingleAccountDisplay = ({
             <div className="text-base">{succinctAccountName}</div>
             <div className="flex flex-row items-center gap-2 text-white text-opacity-60 text-sm">
               {succinctAddress}
-              <div className="w-3 h-5 flex">
-                <BlockExplorerButton />
-              </div>
               <div className="w-5 h-5">
                 <CopyPasteIcon className='place-self-center cursor-pointer w-full h-full hover:text-link' textToCopy={accountAddress} />
               </div>
