@@ -153,8 +153,7 @@ export const PrivateWalletContextProvider = (props) => {
   };
 
   useEffect(() => {
-    let interval;
-    interval = setInterval(async () => {
+    const interval = setInterval(async () => {
       fetchSignerVersion();
     }, 2000);
     return () => interval && clearInterval(interval);

@@ -3,7 +3,6 @@ import NETWORK from 'constants/NetworkConstants';
 import React, { createContext, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { dolphinConfig, calamariConfig } from 'config';
-import { Outlet } from 'react-router-dom';
 
 const ConfigContext = createContext();
 

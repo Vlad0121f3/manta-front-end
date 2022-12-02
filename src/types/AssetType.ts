@@ -29,7 +29,7 @@ const CalamariAssetIds = {
   MOVR: 11,
   KSM: 12,
   PHA: 13
-}
+};
 
 const getAssetIds = (config) => {
   if (config.NETWORK_NAME === 'Calamari') {
@@ -39,7 +39,7 @@ const getAssetIds = (config) => {
   } else if (config.NETWORK_NAME === 'Manta') {
     throw new Error('Unimplemented');
   }
-}
+};
 
 export default class AssetType {
   constructor(
@@ -168,14 +168,14 @@ export default class AssetType {
   }
 
   static AllCurrencies(config, isPrivate) {
-    if (config.NETWORK_NAME === "Dolphin") {
+    if (config.NETWORK_NAME === 'Dolphin') {
       return [
         AssetType.Karura(config, isPrivate),
         AssetType.Kusama(config, isPrivate),
         AssetType.Moonriver(config, isPrivate),
         AssetType.Dolphin(config, isPrivate)
       ];
-    } else if (config.NETWORK_NAME === "Calamari") {
+    } else if (config.NETWORK_NAME === 'Calamari') {
       return [
         AssetType.Karura(config, isPrivate),
         AssetType.Moonriver(config, isPrivate),
@@ -229,6 +229,6 @@ export default class AssetType {
 
   canTransferXcm = (originChain, destinationChain) => {
     return originChain.xcmAssets.find(asset => asset.name === this.name)
-      && destinationChain.xcmAssets.find(asset => asset.name === this.name)
+      && destinationChain.xcmAssets.find(asset => asset.name === this.name);
   };
 }

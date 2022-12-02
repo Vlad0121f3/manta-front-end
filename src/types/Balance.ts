@@ -49,8 +49,8 @@ export default class Balance {
   }
 
   toString(decimals = 3) {
-    return this.valueBaseUnits().toDecimalPlaces(decimals, Decimal.ROUND_DOWN).toString()
-  };
+    return this.valueBaseUnits().toDecimalPlaces(decimals, Decimal.ROUND_DOWN).toString();
+  }
 
   toDisplayString(decimals = 3, roundDown = true) {
     const rounding = roundDown ? Decimal.ROUND_DOWN : Decimal.ROUND_UP;
@@ -64,7 +64,7 @@ export default class Balance {
   }
 
   toFeeDisplayString() {
-    return this.toDisplayString(6, false)
+    return this.toDisplayString(6, false);
   }
 
   toUsd(usdPerToken: Usd) {

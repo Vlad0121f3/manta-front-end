@@ -1,7 +1,8 @@
 // @ts-nocheck
-import { KeyringContextProvider } from "./keyringContext"
-import { ThemeProvider } from "./themeContext"
+import React from 'react';
 import PropTypes from 'prop-types';
+import { KeyringContextProvider } from './keyringContext';
+import { ThemeProvider } from './themeContext';
 
 const GlobalContexts = ({children}) => {
   return (
@@ -10,10 +11,10 @@ const GlobalContexts = ({children}) => {
         {children}
       </ThemeProvider >
     </KeyringContextProvider>
-  )
-}
+  );
+};
 
-KeyringContextProvider.propTypes = {
+GlobalContexts.propTypes = {
   children: PropTypes.any
 };
 

@@ -1,18 +1,20 @@
 // @ts-nocheck
-import { ConfigContextProvider, useConfig } from "contexts/configContext"
-import { ExternalAccountContextProvider } from "contexts/externalAccountContext"
-import { SubstrateContextProvider } from "contexts/substrateContext"
-import { MetamaskContextProvider } from 'contexts/metamaskContext';
-import { Outlet } from "react-router-dom"
 import NETWORK from 'constants/NetworkConstants';
-import Navbar from "components/Navbar";
-import DeveloperConsole from "components/Developer/DeveloperConsole";
-import { TxStatusContextProvider, useTxStatus } from "contexts/txStatusContext";
-import { useEffect } from "react";
-import { showError, showInfo, showSuccess } from "utils/ui/Notifications";
-import { UsdPricesContextProvider } from "contexts/usdPricesContext";
-import { PrivateWalletContextProvider } from "contexts/privateWalletContext";
-import { ZkAccountBalancesContextProvider } from "contexts/zkAccountBalancesContext";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { ConfigContextProvider, useConfig } from 'contexts/configContext';
+import { ExternalAccountContextProvider } from 'contexts/externalAccountContext';
+import { SubstrateContextProvider } from 'contexts/substrateContext';
+import { MetamaskContextProvider } from 'contexts/metamaskContext';
+import { Outlet } from 'react-router-dom';
+import Navbar from 'components/Navbar';
+import DeveloperConsole from 'components/Developer/DeveloperConsole';
+import { TxStatusContextProvider, useTxStatus } from 'contexts/txStatusContext';
+import { useEffect } from 'react';
+import { showError, showInfo, showSuccess } from 'utils/ui/Notifications';
+import { UsdPricesContextProvider } from 'contexts/usdPricesContext';
+import { PrivateWalletContextProvider } from 'contexts/privateWalletContext';
+import { ZkAccountBalancesContextProvider } from 'contexts/zkAccountBalancesContext';
 
 const TxStatusHandler = () => {
   const config = useConfig();
@@ -32,8 +34,8 @@ const TxStatusHandler = () => {
 
   return (
     <div />
-  )
-}
+  );
+};
 
 const BasePage = ({children}) => {
   return (
@@ -46,19 +48,23 @@ const BasePage = ({children}) => {
         </TxStatusContextProvider>
       </ExternalAccountContextProvider>
     </SubstrateContextProvider>
-  )
-}
+  );
+};
+
+BasePage.propTypes = {
+  children: PropTypes.any
+};
 
 export const CalamariBasePage = () => {
   return (
     <ConfigContextProvider network={NETWORK.CALAMARI}>
       <BasePage>
-          <Navbar />
+        <Navbar />
         <Outlet />
       </BasePage>
     </ConfigContextProvider>
   );
-}
+};
 
 export const DolphinBasePage = () => {
   return (
@@ -77,4 +83,4 @@ export const DolphinBasePage = () => {
       </BasePage>
     </ConfigContextProvider>
   );
-}
+};

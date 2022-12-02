@@ -3,8 +3,8 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import detectEthereumProvider from '@metamask/detect-provider';
 import Chain from 'types/Chain';
-import { useConfig } from './configContext';
 import { getHasAuthToConnectMetamaskStorage } from 'utils/persistence/connectAuthorizationStorage';
+import { useConfig } from './configContext';
 
 const MetamaskContext = createContext();
 
@@ -28,23 +28,23 @@ export const MetamaskContextProvider = (props) => {
 
   useEffect(() => {
     const detectMetamask = async () => {
-        if (!provider) {
-          const metamask = await detectEthereumProvider({
-            mustBeMetaMask: true
-          });
-          if (metamask) {
-            setProvider(metamask);
-            // check metamask locked 
-            if (metamask?.selectedAddress && hasAuthConnectMetamask) {
-              setEthAddress(metamask.selectedAddress);
-            }
-          }
-        } else {
+      if (!provider) {
+        const metamask = await detectEthereumProvider({
+          mustBeMetaMask: true
+        });
+        if (metamask) {
+          setProvider(metamask);
           // check metamask locked 
-          if (provider?.selectedAddress && hasAuthConnectMetamask) {
-            setEthAddress(provider.selectedAddress);
+          if (metamask?.selectedAddress && hasAuthConnectMetamask) {
+            setEthAddress(metamask.selectedAddress);
           }
         }
+      } else {
+        // check metamask locked 
+        if (provider?.selectedAddress && hasAuthConnectMetamask) {
+          setEthAddress(provider.selectedAddress);
+        }
+      }
     };
 
     const interval = setInterval(async () => {

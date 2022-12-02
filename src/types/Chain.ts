@@ -1,15 +1,15 @@
 // @ts-nocheck
+import NETWORK from 'constants/NetworkConstants';
 import Svgs from 'resources/icons';
 import { KaruraAdapter } from 'manta-polkawallet-bridge-dev/build/adapters/acala';
 import { CalamariAdapter, DolphinAdapter } from 'manta-polkawallet-bridge-dev/build/adapters/manta';
 import { KusamaAdapter} from 'manta-polkawallet-bridge-dev/build/adapters/polkadot';
 import { MoonriverAdapter } from 'manta-polkawallet-bridge-dev/build/adapters/moonbeam';
-import { typesBundlePre900 } from "moonbeam-types-bundle"
-import types from '../config/types.json';
-import AssetType from './AssetType';
+import { typesBundlePre900 } from 'moonbeam-types-bundle';
 import { options } from '@acala-network/api';
 import { ApiPromise, WsProvider } from '@polkadot/api';
-import NETWORK from 'constants/NetworkConstants';
+import types from '../config/types.json';
+import AssetType from './AssetType';
 
 export default class Chain {
   constructor(

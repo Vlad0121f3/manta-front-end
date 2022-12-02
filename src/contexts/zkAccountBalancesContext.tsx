@@ -30,7 +30,7 @@ export const ZkAccountBalancesContextProvider = (props) => {
   const [totalBalanceString, setTotalBalanceString] = useState('$0.00');
   const [balances, setBalances] = useState([]);
 
-  const fetchPrivateBalance = async (assetType: any) => {
+  const fetchPrivateBalance = async (assetType) => {
     let usdBalance = null;
     const privateBalance = await getSpendableBalance(assetType);
     if (privateBalance) {
@@ -54,9 +54,9 @@ export const ZkAccountBalancesContextProvider = (props) => {
   };
 
   const fetchPrivateBalances = async () => {
-    let totalUsd = new Usd(new Decimal(0));
+    const totalUsd = new Usd(new Decimal(0));
     const updatedBalances = await Promise.all(
-      assets.map(async (assetType: any) => {
+      assets.map(async (assetType) => {
         const fetchPrivateBalanceRes = await fetchPrivateBalance(assetType);
         fetchPrivateBalanceRes?.usdBalance?.value &&
           totalUsd.add(fetchPrivateBalanceRes.usdBalance);

@@ -1,10 +1,10 @@
 // @ts-nocheck
+import NETWORK from 'constants/NetworkConstants';
 import { ethers } from 'ethers';
 import Xtokens from 'eth/Xtokens.json';
 import Chain from 'types/Chain';
 import { hexStripPrefix, hexAddPrefix, u8aToHex } from '@polkadot/util';
 import { decodeAddress } from '@polkadot/util-crypto';
-import NETWORK from 'constants/NetworkConstants';
 
 
 // Same for Moonbeam, Moonriver, Moonbase
@@ -15,7 +15,7 @@ const XTOKENS_PRECOMPILE_PARACHAIN_SELECTOR = '0x00';
 const XTOKENS_PRECOMPILE_ACCOUNT_ID_32_SELECTOR = '0x01';
 const XTOKENS_PRECOMPILE_NETWORK_ANY_SUFFIX  = '00';
 
-const CALAMARI_DESTINATION_WEIGHT = '4000000000'
+const CALAMARI_DESTINATION_WEIGHT = '4000000000';
 
 const addressToAccountId = (address) => {
   return hexAddPrefix(u8aToHex(decodeAddress(address)));
@@ -61,9 +61,9 @@ export const transferMovrFromMoonriverToCalamari = async (config, provider, bala
   const accountId = addressToAccountId(address);
   let parachainId;
   if (config.NETWORK_NAME === NETWORK.DOLPHIN) {
-    parachainId = Chain.Dolphin(config).parachainId
+    parachainId = Chain.Dolphin(config).parachainId;
   } else if (config.NETWORK_NAME === NETWORK.CALAMARI) {
-    parachainId = Chain.Dolphin(config).parachainId
+    parachainId = Chain.Dolphin(config).parachainId;
   }
   const destination = getXtokensPrecompileLocation(parachainId, accountId);
   const weight = CALAMARI_DESTINATION_WEIGHT;

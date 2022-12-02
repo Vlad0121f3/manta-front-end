@@ -3,15 +3,14 @@ import React, {
   createContext,
   useState,
   useEffect,
-  useContext,
-  useRef
+  useContext
 } from 'react';
 import PropTypes from 'prop-types';
 import { BN } from 'bn.js';
 import Balance from 'types/Balance';
+import AssetType from 'types/AssetType';
 import { useExternalAccount } from './externalAccountContext';
 import { useSubstrate } from './substrateContext';
-import AssetType from 'types/AssetType';
 
 interface IPublicBalances {
   [key: number]: Balance;
@@ -47,12 +46,12 @@ export const PublicBalancesContextProvider = (props) => {
           };
         });
       });
-      return;
+      return unsub;
     }
     const unsub = await api.query.assets.account(
       assetType.assetId,
       address,
-      ({ value }: any) => {
+      ({ value }) => {
         const balanceString = value.isEmpty ? '0' : value.balance.toString();
         setPublicBalances((prev) => {
           return {
@@ -62,6 +61,7 @@ export const PublicBalancesContextProvider = (props) => {
         });
       }
     );
+    return unsub;
   };
 
   const subscribeBalanceChanges = async (address: string) => {
@@ -83,7 +83,8 @@ export const PublicBalancesContextProvider = (props) => {
 
   useEffect(() => {
     if (api && externalAccount) {
-      subscribeBalanceChanges(externalAccount?.address);
+      const unsub = subscribeBalanceChanges(externalAccount?.address);
+      unsub && unsub();
     }
   }, [api, externalAccount]);
 
