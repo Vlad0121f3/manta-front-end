@@ -46,7 +46,7 @@ const BridgeForm = () => {
           <img
             onClick={onClickSwitchOriginAndDestination}
             className="mx-auto pb-7 cursor-pointer"
-            src={Svgs.ArrowRightIcon}
+            src={Svgs.LeftRightArrowIcon}
             alt="switch-icon"
           />
           <ChainSelect

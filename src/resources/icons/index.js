@@ -36,6 +36,7 @@ import ShieldIcon from 'resources/icons/shield-lock.svg';
 import InternetIcon from 'resources/icons/internet.svg';
 import LockIcon from 'resources/icons/lock.svg';
 import UpDownArrowIcon from 'resources/icons/up-down-arrow.svg';
+import LeftRightArrowIcon from 'resources/icons/left-right-arrow.svg';
 import MoonIcon from 'resources/icons/moon.svg';
 import SwitchIcon from 'resources/icons/switch.svg';
 import SettingIcon from 'resources/icons/setting.svg';
@@ -105,6 +106,7 @@ const Svgs = {
   InternetIcon,
   LockIcon,
   UpDownArrowIcon,
+  LeftRightArrowIcon,
   SwitchIcon,
   SettingIcon,
   ArrowDownIcon,
