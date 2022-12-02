@@ -10,8 +10,6 @@ import AccountDisplay from './AccountDisplay';
 import StakingTable from './Tables/StakingTable';
 import UnstaktingTable from './Tables/UnstakingTable';
 import CollatorsTable from './Tables/CollatorsTable';
-import Navs from 'components/Navbar/Navs';
-
 const StakePageContent = () => {
   const { keyring } = useKeyring();
   const config = useConfig();
@@ -34,7 +32,6 @@ const StakePageContent = () => {
 
   return (
     <div className="flex flex-col gap-6 items-center">
-      <Navs />
       <div className="mx-auto staking-table px-10 pt-2 pb-10 w-full">
         {warningModal}
         <AccountDisplay />
