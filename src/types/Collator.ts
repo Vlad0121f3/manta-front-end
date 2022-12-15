@@ -40,6 +40,7 @@ const ADDRESS_TO_COLLATOR_NAME_MAP = {
   dmvVY24KwgNwoYnHw5EbC8mTUF9CtZeJzCnSGBawWzaRkNHH4: 'lets_node',
   dmyhNFR1qUuA8efaYvpW75qGKrYfzrK8ejygttHojeL4ujzUb: '🧊Iceberg Nodes🧊 | C1',
   dmu7ke7UqHb9oh4zbA9z7sUe9SjTEqqXyWF39dXva2aBuYyDR: 'CertHum',
+  dmzE9ZpFEiZMYTJ5JTcnhUxVenjpoKgEVNsRe3wHULui4XA44: 'ERN VENTURES',
   dmz8r5YJUBZp4zc5RbhBYQHCNAxN2WnfPUkMhDyqmMLTfK31E: 'P2P_ORG_1',
   // test collators
   dmyjURuBeJwFo4Nvf2GZ8f5E2Asz98JY2d7UcaDykqYm1zpoi: 'Alice',
